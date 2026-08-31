@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: world_bank
+    description: "Données brutes issues de l'API World Bank."
+    project: data-quest-sebastien
+    dataset: world_bank_raw
+
+    tables:
+      - name: raw_data
+        description: "Indicateurs économiques, sociaux, démographiques et environnementaux par pays et par année."
