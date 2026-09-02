@@ -2166,6 +2166,7 @@ dependencies = [
     { name = "pandas" },
     { name = "pyarrow" },
     { name = "pyspark" },
+    { name = "python-dotenv" },
 ]
 
 [package.metadata]
@@ -2174,6 +2175,7 @@ requires-dist = [
     { name = "pandas", specifier = "<3" },
     { name = "pyarrow", specifier = "==22.0.0" },
     { name = "pyspark", specifier = ">=4.2.0" },
+    { name = "python-dotenv", specifier = ">=1.2.3" },
 ]
 
 [[package]]
