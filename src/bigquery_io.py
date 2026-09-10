@@ -4,7 +4,7 @@ from typing import Any
 from google.api_core.exceptions import NotFound
 from google.cloud import bigquery
 
-from src.config import FULL_TABLE_ID, HASH_LIMIT
+from src.config import FULL_TABLE_ID
 
 
 logger = logging.getLogger(__name__)
@@ -14,7 +14,7 @@ def recuperer_hash_existants(
     client: bigquery.Client,
 ) -> set[str]:
     """
-    Récupère les hash récents présents dans BigQuery.
+    Récupère tous les hash déjà présents dans BigQuery.
 
     Args:
         client: Client BigQuery.
@@ -27,10 +27,9 @@ def recuperer_hash_existants(
         client.get_table(FULL_TABLE_ID)
 
         query = f"""
-            SELECT row_hash
+            SELECT DISTINCT row_hash
             FROM `{FULL_TABLE_ID}`
-            ORDER BY inserted_at DESC
-            LIMIT {HASH_LIMIT}
+            WHERE row_hash IS NOT NULL
         """
 
         result = client.query(query).result()
@@ -41,7 +40,7 @@ def recuperer_hash_existants(
         }
 
         logger.info(
-            "Hash récupérés : %s",
+            "Hash existants récupérés : %s",
             len(existing_hashes),
         )
 
