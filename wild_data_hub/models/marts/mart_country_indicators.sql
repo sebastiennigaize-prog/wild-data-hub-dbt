@@ -11,7 +11,7 @@ select
     max(case when indicator_code = 'SL.UEM.TOTL.ZS' then value end) as chomage,
     max(case when indicator_code = 'FP.CPI.TOTL.ZG' then value end) as inflation,
     max(case when indicator_code = 'EG.ELC.ACCS.ZS' then value end) as acces_electricite,
-    max(case when indicator_code = 'EN.ATM.CO2E.PC' then value end) as co2_par_habitant,
+    max(case when indicator_code = 'EN.GHG.CO2.PC.CE.AR5' then value end) as co2_par_habitant,
     max(case when indicator_code = 'SP.DYN.CBRT.IN' then value end) as taux_natalite,
     max(case when indicator_code = 'SE.SEC.ENRR' then value end) as scolarisation_secondaire,
     max(case when indicator_code = 'SE.TER.ENRR' then value end) as scolarisation_superieur,
