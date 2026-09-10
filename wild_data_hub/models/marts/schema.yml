@@ -1,0 +1,78 @@
+version: 2
+
+models:
+  - name: dim_pays
+    description: "Dimension des pays, territoires et agrégats géographiques."
+
+    columns:
+      - name: country_key
+        description: "Clé du pays basée sur le code ISO3 ou l'identifiant géographique."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: country_name
+        description: "Nom du pays, territoire ou agrégat géographique."
+
+  - name: dim_annee
+    description: "Dimension des années disponibles dans les données."
+
+    columns:
+      - name: annee_key
+        description: "Clé de l'année."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: annee
+        description: "Année de l'observation."
+
+  - name: dim_indicator
+    description: "Dimension des indicateurs de la Banque mondiale."
+
+    columns:
+      - name: indicator_key
+        description: "Clé de l'indicateur basée sur son code Banque mondiale."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: indicator_code
+        description: "Code de l'indicateur Banque mondiale."
+
+      - name: indicator_name
+        description: "Nom de l'indicateur Banque mondiale."
+
+  - name: fact_indicators
+    description: "Table de faits contenant une observation par pays, année et indicateur."
+
+    columns:
+      - name: country_key
+        description: "Clé étrangère vers dim_pays."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_pays')
+                field: country_key
+
+      - name: annee_key
+        description: "Clé étrangère vers dim_annee."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_annee')
+                field: annee_key
+
+      - name: indicator_key
+        description: "Clé étrangère vers dim_indicator."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_indicator')
+                field: indicator_key
+
+      - name: value
+        description: "Valeur de l'indicateur pour le pays et l'année."
