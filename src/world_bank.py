@@ -1,5 +1,6 @@
 import hashlib
 import json
+import logging
 import time
 from datetime import datetime, timezone
 from typing import Any
@@ -13,6 +14,9 @@ from src.config import (
     REQUEST_DELAY,
     REQUEST_TIMEOUT,
 )
+
+
+logger = logging.getLogger(__name__)
 
 
 def calculer_hash(row: Any) -> str:
@@ -60,13 +64,16 @@ def recuperer_page_api(
         )
 
     except requests.RequestException as e:
-        print(f"❌ Erreur de requête : {e}")
+        logger.error(
+            "Erreur lors de l'appel à l'API : %s",
+            e,
+        )
         return None
 
     if response.status_code != 200:
-        print(
-            f"❌ Erreur HTTP : "
-            f"{response.status_code}"
+        logger.error(
+            "Erreur HTTP lors de l'appel API : statut %s",
+            response.status_code,
         )
         return None
 
@@ -74,7 +81,9 @@ def recuperer_page_api(
         return response.json()
 
     except requests.exceptions.JSONDecodeError:
-        print("❌ Réponse non-JSON")
+        logger.error(
+            "La réponse de l'API n'est pas un JSON valide."
+        )
         return None
 
 
@@ -159,9 +168,10 @@ def recuperer_donnees_world_bank() -> list[dict[str, Any]]:
             "page": 1,
         }
 
-        print(
-            f"\n🔎 Récupération : "
-            f"{nom_indicateur} ({code})"
+        logger.info(
+            "Récupération de l'indicateur %s (%s)",
+            nom_indicateur,
+            code,
         )
 
         lignes_recuperees = 0
@@ -176,11 +186,19 @@ def recuperer_donnees_world_bank() -> list[dict[str, Any]]:
             )
 
             if data is None:
+                logger.error(
+                    "Récupération interrompue pour %s (%s)",
+                    nom_indicateur,
+                    code,
+                )
                 break
 
             if not verifier_reponse_api(data):
-                print(
-                    "❌ Structure de réponse inattendue"
+                logger.error(
+                    "Structure de réponse inattendue "
+                    "pour %s (%s)",
+                    nom_indicateur,
+                    code,
                 )
                 break
 
@@ -195,9 +213,13 @@ def recuperer_donnees_world_bank() -> list[dict[str, Any]]:
                 params["page"],
             )
 
-            print(
-                f"   Page {page_actuelle}/{pages} "
-                f"- {len(lignes)} lignes"
+            logger.info(
+                "%s (%s) : page %s/%s, %s lignes reçues",
+                nom_indicateur,
+                code,
+                page_actuelle,
+                pages,
+                len(lignes),
             )
 
             for ligne in lignes:
@@ -220,29 +242,38 @@ def recuperer_donnees_world_bank() -> list[dict[str, Any]]:
 
         if lignes_recuperees != total:
 
-            print(
-                f"⚠️ Attention : "
-                f"{lignes_recuperees} lignes récupérées "
-                f"sur {total} annoncées par l'API."
+            logger.warning(
+                "%s (%s) : %s lignes récupérées "
+                "sur %s annoncées",
+                nom_indicateur,
+                code,
+                lignes_recuperees,
+                total,
             )
 
         else:
 
-            print(
-                f"✅ Vérification OK : "
-                f"{lignes_recuperees} lignes récupérées "
-                f"sur {total} annoncées."
+            logger.info(
+                "%s (%s) : vérification OK, "
+                "%s lignes récupérées",
+                nom_indicateur,
+                code,
+                lignes_recuperees,
             )
 
     if not donnees:
+        logger.critical(
+            "Aucune donnée récupérée depuis l'API World Bank."
+        )
+
         raise ValueError(
             "Aucune donnée n'a été récupérée "
             "depuis l'API World Bank."
         )
 
-    print(
-        f"\n📊 Total de lignes récupérées : "
-        f"{len(donnees)}"
+    logger.info(
+        "Récupération World Bank terminée : %s lignes",
+        len(donnees),
     )
 
     return donnees
