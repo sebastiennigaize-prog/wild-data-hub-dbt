@@ -29,7 +29,7 @@ avec_retry(ingest_data, essais=3, delai=5)
 
 print("\n=== 2. Transformation dbt ===")
 subprocess.run(
-    ["uv", "run", "dbt", "run"],
+    ["dbt", "run"],
     cwd="wild_data_hub",
     check=True,
 )
