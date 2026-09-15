@@ -8,6 +8,7 @@ on:
 jobs:
   pipeline:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v5
 
@@ -38,8 +39,8 @@ jobs:
                 threads: 4
           EOF
 
-          - name: Lancer le pipeline
+      - name: Lancer le pipeline
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/cle_bigquery.json
           GCP_PROJECT_ID: data-quest-sebastien
-        run: python run_pipeline.py  
+        run: python run_pipeline.py
