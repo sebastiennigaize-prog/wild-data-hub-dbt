@@ -2,6 +2,7 @@ import subprocess
 import time
 
 from load_data import ingest_data
+from predict import main as predire
 
 
 def avec_retry(action, essais=3, delai=5):
@@ -35,4 +36,11 @@ subprocess.run(
 )
 
 
-print("\n✅ Pipeline terminé : données ingérées et transformées.")
+print("\n=== 3. Prédictions Machine Learning ===")
+avec_retry(predire, essais=3, delai=5)
+
+
+print(
+    "\n✅ Pipeline terminé : "
+    "données ingérées, transformées et prédictions ML générées."
+)
