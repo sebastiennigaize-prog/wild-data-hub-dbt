@@ -88,7 +88,7 @@ Les tests permettent notamment de vérifier :
 
 La commande `dbt build` exécute les modèles et leurs tests avant de lancer les prédictions.
 
-Lors de la dernière exécution du pipeline, les 17 tests dbt ont été exécutés avec succès.
+Lors de la dernière exécution du pipeline, les 19 tests dbt ont été exécutés avec succès.
 
 ## Machine Learning — Prédiction de l'espérance de vie
 
