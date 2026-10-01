@@ -30,6 +30,8 @@ COLONNES_EXPLICATIVES = [
 # ============================================================
 
 def charger_donnees(client):
+    """Charge depuis BigQuery les données nécessaires aux prédictions."""
+
     requete = f"""
         SELECT
             country_name,
@@ -71,6 +73,8 @@ def charger_donnees(client):
 # ============================================================
 
 def calculer_predictions(df):
+    """Génère les prédictions et calcule l'erreur absolue."""
+
     pipeline = joblib.load(FICHIER_MODELE)
 
     X = df[COLONNES_EXPLICATIVES].copy()
@@ -108,6 +112,8 @@ def calculer_predictions(df):
 # ============================================================
 
 def enregistrer_predictions(client, df_resultats):
+    """Enregistre les prédictions dans la table BigQuery dédiée."""
+
     # Creation du dataset ML s'il n'existe pas.
     dataset = bigquery.Dataset(f"{PROJECT_ID}.ml")
     client.create_dataset(dataset, exists_ok=True)
@@ -143,6 +149,8 @@ def enregistrer_predictions(client, df_resultats):
 # ============================================================
 
 def main():
+    """Exécute le processus complet de génération des prédictions."""
+
     client = bigquery.Client(project=PROJECT_ID)
 
     df = charger_donnees(client)

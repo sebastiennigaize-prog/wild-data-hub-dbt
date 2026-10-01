@@ -36,6 +36,8 @@ DERNIERE_ANNEE_TEST = 2024
 # ============================================================
 
 def charger_donnees():
+    """Charge depuis BigQuery les données utilisées pour entraîner le modèle."""
+
     client = bigquery.Client(project=PROJECT_ID)
 
     requete = f"""
@@ -64,6 +66,8 @@ def charger_donnees():
 # ============================================================
 
 def preparer_donnees(df):
+    """Prépare et convertit les données nécessaires à l'entraînement."""
+
     # Les lignes sans esperance de vie connue ne peuvent pas
     # servir a entrainer ou evaluer le modele.
     df = df.dropna(subset=[COLONNE_CIBLE]).copy()
@@ -96,6 +100,8 @@ def preparer_donnees(df):
 # ============================================================
 
 def creer_pipeline():
+    """Crée le pipeline scikit-learn de préparation et de régression."""
+
     # La mediane sera calculee uniquement sur les donnees
     # d'entrainement. Les vrais zeros sont conserves.
     preparation = ColumnTransformer(
@@ -126,6 +132,8 @@ def creer_pipeline():
 # ============================================================
 
 def entrainer_modele():
+    """Entraîne, évalue puis sauvegarde le modèle de régression."""
+
     df = charger_donnees()
     df = preparer_donnees(df)
 
