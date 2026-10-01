@@ -55,6 +55,30 @@ Son exécution est automatisée avec GitHub Actions.
 - **Power BI** : analyse et visualisation des données
 - **Git / GitHub** : versionnement et gestion du projet
 
+## Structure du projet
+
+- `load_data.py` : collecte et ingestion des données de l'API World Bank dans BigQuery.
+- `run_pipeline.py` : orchestration du pipeline complet.
+- `train_model.py` : entraînement et évaluation du modèle de Machine Learning.
+- `predict.py` : génération et enregistrement des prédictions dans BigQuery.
+- `pipeline_chronologique.pkl` : modèle de Machine Learning entraîné.
+- `wild_data_hub/models/staging/` : préparation des données sources avec dbt.
+- `wild_data_hub/models/marts/` : modèle dimensionnel et tables analytiques.
+- `.github/workflows/pipeline.yml` : automatisation du pipeline avec GitHub Actions.
+- `requirements.txt` : dépendances Python du projet.
+
+## Sources de données
+
+Les données proviennent de l'API publique de la Banque mondiale (World Bank API).
+
+Le projet exploite des indicateurs économiques, démographiques, sociaux, éducatifs et environnementaux pour différents pays et années.
+
+Les données récupérées sont historisées dans Google BigQuery avant d'être transformées avec dbt.
+
+## Contact
+
+Sébastien Nigaize — dépôt GitHub : `sebastiennigaize-prog/wild-data-hub-dbt`
+
 ## Modélisation des données avec dbt
 
 Les données brutes provenant de la Banque mondiale sont transformées avec dbt afin de construire un modèle adapté à l'analyse.
