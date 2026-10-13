@@ -1,5 +1,13 @@
 # Wild Data Hub — Analyse des indicateurs de la Banque mondiale
 
+### 🌍 Application Streamlit — Démonstration du projet
+
+Découvrez Wild Data Hub à travers une application web présentant l'architecture du pipeline de données, le dashboard Power BI (6 pages), les résultats du modèle de Machine Learning et la documentation technique.
+
+**🚀 [Accéder à l'application Wild Data Hub](https://wild-data-sebastien.streamlit.app/)**
+
+*Application de présentation du projet — le dashboard Power BI est consultable en version non interactive.*
+
 ## Présentation du projet
 
 Ce projet Data Analyst exploite des données issues de l'API de la Banque mondiale afin d'analyser l'évolution d'indicateurs économiques, démographiques, sociaux et environnementaux à l'échelle internationale.
