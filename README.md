@@ -6,9 +6,9 @@ Découvrez Wild Data Hub à travers une application web présentant l'architectu
 
 **🚀 [Accéder à l'application Wild Data Hub](https://wild-data-sebastien.streamlit.app/)**
 
-📘 [Retour d'expérience — Difficultés rencontrées et solutions apportées](docs/retour_experience.md)
-
 *Application de présentation du projet — le dashboard Power BI est consultable en version non interactive.*
+
+📘 [Retour d'expérience — Difficultés rencontrées et solutions apportées](docs/retour_experience.md)
 
 ## Présentation du projet
 
