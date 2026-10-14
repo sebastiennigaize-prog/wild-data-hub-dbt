@@ -2,13 +2,14 @@
 
 ### 🌍 Application Streamlit — Démonstration du projet
 
-**🚀 [Accéder à l'application Wild Data Hub](https://wild-data-sebastien.streamlit.app/)**
 
 📘 [Retour d'expérience — Difficultés rencontrées et solutions apportées](docs/retour_experience.md)
 
 Découvrez Wild Data Hub à travers une application web présentant l'architecture du pipeline de données, le dashboard Power BI (6 pages), les résultats du modèle de Machine Learning et la documentation technique.
 
 **🚀 [Accéder à l'application Wild Data Hub](https://wild-data-sebastien.streamlit.app/)**
+
+📘 [Retour d'expérience — Difficultés rencontrées et solutions apportées](docs/retour_experience.md)
 
 *Application de présentation du projet — le dashboard Power BI est consultable en version non interactive.*
 
