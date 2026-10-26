@@ -21,7 +21,7 @@ PDF_PATH = Path(__file__).parent / "dashboard.pdf"
 
 
 # ============================================================
-# STYLE
+# STYLE — COMPATIBLE LIGHT / DARK
 # ============================================================
 
 st.markdown(
@@ -32,12 +32,14 @@ st.markdown(
             padding-bottom: 3rem;
         }
 
-        h1, h2, h3 {
-            color: #203354;
+        /* Fond adapté au thème Streamlit */
+        .stApp {
+            background-color: var(--background-color);
         }
 
-        .stApp {
-            background-color: #fafbfd;
+        /* Titres adaptés au thème Streamlit */
+        h1, h2, h3 {
+            color: var(--text-color);
         }
     </style>
     """,
