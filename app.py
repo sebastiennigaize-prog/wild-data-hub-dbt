@@ -1,4 +1,3 @@
-
 import base64
 from pathlib import Path
 
@@ -31,12 +30,14 @@ st.markdown(
             padding-bottom: 3rem;
         }
 
-        h1, h2, h3 {
-            color: #193b69;
+        /* Fond adapté au thème Streamlit */
+        .stApp {
+            background-color: var(--background-color);
         }
 
-        .stApp {
-            background-color: #fafbfd;
+        /* Titres adaptés au thème Streamlit */
+        h1, h2, h3 {
+            color: var(--text-color);
         }
     </style>
     """,
